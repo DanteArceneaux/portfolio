@@ -14,6 +14,9 @@ const AnalyticsDashboardDemoLazy = lazy(() =>
 const LandingLeadFormDemoLazy = lazy(() =>
   import('@/features/projects/demos/LandingLeadFormDemo').then((m) => ({ default: m.LandingLeadFormDemo }))
 );
+const ScopeBuilderDemoLazy = lazy(() =>
+  import('@/features/projects/demos/ScopeBuilderDemo').then((m) => ({ default: m.ScopeBuilderDemo }))
+);
 
 export const Projects = () => {
   const projects: Project[] = profile.projects;
@@ -25,6 +28,7 @@ export const Projects = () => {
   const demoRegistry: Record<ProjectDemoId, DemoComponent> = {
     dashboard: AnalyticsDashboardDemoLazy as DemoComponent,
     landing: LandingLeadFormDemoLazy as DemoComponent,
+    scope: ScopeBuilderDemoLazy as DemoComponent,
   };
 
   const DemoComponent = useMemo(() => {

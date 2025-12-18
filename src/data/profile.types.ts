@@ -23,7 +23,7 @@ export type FaqItem = {
   a: string;
 };
 
-export type ProjectDemoId = 'dashboard' | 'landing';
+export type ProjectDemoId = 'dashboard' | 'landing' | 'scope';
 
 export type Project = {
   title: string;

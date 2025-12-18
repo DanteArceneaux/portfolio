@@ -119,6 +119,20 @@ export const profile: Profile = {
   ],
   projects: [
     {
+      title: "Contract‑Grade Scope Builder",
+      tech: ["React", "TypeScript", "Tailwind", "Framer Motion"],
+      description: "An interactive scope + quote preview that turns requirements into a clear deliverables checklist.",
+      challenge: "Clients often hesitate because scope, timelines, and deliverables feel unclear upfront.",
+      solution: "Built a step-by-step scope wizard that outputs a clean summary, estimates, risk flags, and a copy/download handoff.",
+      demoId: "scope",
+      thumbnail: "/projects/scope.png",
+      highlights: [
+        "Wizard-driven requirements intake",
+        "Instant timeline + price range",
+        "Copy/download scope summary"
+      ]
+    },
+    {
       title: "SaaS Analytics Dashboard",
       // Note: chart is rendered with SVG (intentionally no chart library for this lightweight demo)
       tech: ["React", "TypeScript", "Tailwind", "SVG"],
