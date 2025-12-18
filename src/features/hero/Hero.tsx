@@ -1,6 +1,7 @@
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
+import headshotUrl from '@/assets/headshot.png';
 import { motion } from 'framer-motion';
 import { ArrowRight, Terminal, Scale } from 'lucide-react';
 
@@ -15,6 +16,29 @@ export const Hero = () => {
 
       <Section className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="flex items-center gap-4"
+          >
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-primary to-accent opacity-40 blur-sm" />
+              <img
+                src={headshotUrl}
+                alt={`${profile.name} headshot`}
+                className="relative w-14 h-14 rounded-full object-cover ring-1 ring-white/10"
+              />
+            </div>
+            <div className="leading-tight">
+              <div className="font-semibold">{profile.name}</div>
+              <div className="text-sm text-muted-foreground">
+                {profile.title} • {profile.location}
+              </div>
+              <div className="text-sm text-muted-foreground">{profile.handle}</div>
+            </div>
+          </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -78,6 +102,21 @@ export const Hero = () => {
                     <div className="w-3 h-3 rounded-full bg-yellow-500" />
                     <div className="w-3 h-3 rounded-full bg-green-500" />
                     <div className="ml-auto text-xs text-muted-foreground">profile.ts</div>
+                 </div>
+                 <div className="flex items-center gap-4">
+                   <div className="relative">
+                     <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-primary to-accent opacity-35 blur-sm" />
+                     <img
+                       src={headshotUrl}
+                       alt={`${profile.name} headshot`}
+                       className="relative w-20 h-20 rounded-full object-cover ring-1 ring-white/10"
+                     />
+                   </div>
+                   <div className="leading-tight">
+                     <div className="text-xl font-semibold">{profile.name}</div>
+                     <div className="text-sm text-muted-foreground">{profile.title}</div>
+                     <div className="text-sm text-muted-foreground">{profile.handle}</div>
+                   </div>
                  </div>
                  <div className="space-y-2 font-mono text-sm">
                     <div className="flex gap-2">
