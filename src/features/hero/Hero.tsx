@@ -67,7 +67,7 @@ export const Hero = () => {
             transition={{ delay: 0.4 }}
             className="text-lg md:text-xl text-muted-foreground max-w-lg"
           >
-            I am a US-based developer with a Law background. I bring strict legal precision to your React & Tailwind applications.
+            I convert Figma/screenshots into pixel-perfect React + Tailwind applications—fast, accessible, and contract-grade.
           </motion.p>
 
           <motion.div 
