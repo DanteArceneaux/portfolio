@@ -76,6 +76,45 @@ export const profile = {
       requirements: "Access to codebase (GitHub) and list of issues."
     }
   ],
+  processSteps: [
+    {
+      title: "Send design & scope",
+      description: "Share a Figma link (preferred) or clear screenshots + tell me what pages/sections you need.",
+      meta: "Same day"
+    },
+    {
+      title: "First draft in 24–48h",
+      description: "You get a responsive, working build early so we can iterate fast and avoid surprises.",
+      meta: "1–2 days"
+    },
+    {
+      title: "Revisions & final delivery",
+      description: "I apply revisions, polish interactions, and deliver clean code with a professional handoff.",
+      meta: "Final"
+    }
+  ],
+  faq: [
+    {
+      q: "What do you need from me to start?",
+      a: "A Figma link (preferred) or clear screenshots, the pages/sections you want, and any brand colors/fonts. If you have existing components or a design system, share that too."
+    },
+    {
+      q: "How many revisions are included?",
+      a: "Two revision rounds are included for most packages. If scope changes significantly, I’ll confirm before proceeding."
+    },
+    {
+      q: "What counts as “one page”?",
+      a: "One route/view (e.g., a landing page). Typical states (hover, empty, loading) are included. Multi-step flows, auth, or complex dashboards are quoted separately."
+    },
+    {
+      q: "What do I receive at delivery?",
+      a: "A clean React + Tailwind codebase (GitHub repo or ZIP), responsive layout, and clear instructions to run/build. I can also deploy to Netlify/Vercel if requested."
+    },
+    {
+      q: "Can you match my existing design system/components?",
+      a: "Yes. If you have tokens/components, I’ll follow them. If not, I’ll build a consistent component style that matches your brand."
+    }
+  ],
   projects: [
     {
       title: "SaaS Analytics Dashboard",
@@ -85,6 +124,7 @@ export const profile = {
       challenge: "Rendering large datasets without UI lag while maintaining mobile responsiveness.",
       solution: "Built a lightweight, interactive dashboard with SVG charting and a sortable table to demonstrate state + UI performance patterns.",
       demoId: "dashboard",
+      thumbnail: "/projects/dashboard.png",
       highlights: [
         "Timeframe toggle (7/30/90 days)",
         "SVG chart rendering (no chart library)",
@@ -98,6 +138,7 @@ export const profile = {
       challenge: "Creating engaging animations that don't compromise load speed.",
       solution: "Added polished micro-animations and an accessible lead form with validation, loading, and a clean success state.",
       demoId: "landing",
+      thumbnail: "/projects/landing.png",
       highlights: [
         "Accessible lead form with validation",
         "Async submit + success state",

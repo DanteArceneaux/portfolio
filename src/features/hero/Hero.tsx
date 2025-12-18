@@ -2,11 +2,12 @@ import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
 import { motion } from 'framer-motion';
-import { ArrowRight, Terminal, Scale } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, Scale } from 'lucide-react';
 
 export const Hero = () => {
   // Served from /public so it has a stable URL (also used by social previews).
-  const headshotUrl = '/headshot.png';
+  const headshotPng = '/headshot.png';
+  const headshotWebp = '/headshot.webp';
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
@@ -26,11 +27,18 @@ export const Hero = () => {
           >
             <div className="relative">
               <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-primary to-accent opacity-40 blur-sm" />
-              <img
-                src={headshotUrl}
-                alt={`${profile.name} headshot`}
-                className="relative w-14 h-14 rounded-full object-cover ring-1 ring-white/10"
-              />
+              <picture>
+                <source srcSet={headshotWebp} type="image/webp" />
+                <img
+                  src={headshotPng}
+                  alt={`${profile.name} headshot`}
+                  width={56}
+                  height={56}
+                  loading="eager"
+                  decoding="async"
+                  className="relative w-14 h-14 rounded-full object-cover ring-1 ring-white/10"
+                />
+              </picture>
             </div>
             <div className="leading-tight">
               <div className="font-semibold">{profile.name}</div>
@@ -72,20 +80,40 @@ export const Hero = () => {
             I convert Figma/screenshots into pixel-perfect React + Tailwind applications—fast, accessible, and contract-grade.
           </motion.p>
 
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="flex flex-wrap gap-2"
+          >
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-muted-foreground">
+              <Building2 className="w-4 h-4 text-primary" />
+              Fortune 500 (Cognizant)
+            </span>
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-muted-foreground">
+              <BadgeCheck className="w-4 h-4 text-primary" />
+              Meta Certified
+            </span>
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-muted-foreground">
+              <Scale className="w-4 h-4 text-primary" />
+              J.D., Univ. of Michigan
+            </span>
+          </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap items-center gap-3"
           >
             <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="gap-2">
+              <Button size="md" className="gap-2 text-base">
                 Hire Me on Fiverr <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
             <a href="#projects">
-              <Button variant="outline" size="lg" className="gap-2">
-                View Portfolio <Terminal className="w-4 h-4" />
+              <Button variant="outline" size="md" className="gap-2 text-base">
+                View Work <ChevronDown className="w-4 h-4" />
               </Button>
             </a>
           </motion.div>
@@ -110,11 +138,18 @@ export const Hero = () => {
                  <div className="flex items-center gap-4">
                    <div className="relative">
                      <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-primary to-accent opacity-35 blur-sm" />
-                     <img
-                       src={headshotUrl}
-                       alt={`${profile.name} headshot`}
-                       className="relative w-20 h-20 rounded-full object-cover ring-1 ring-white/10"
-                     />
+                     <picture>
+                       <source srcSet={headshotWebp} type="image/webp" />
+                       <img
+                         src={headshotPng}
+                         alt={`${profile.name} headshot`}
+                         width={80}
+                         height={80}
+                         loading="lazy"
+                         decoding="async"
+                         className="relative w-20 h-20 rounded-full object-cover ring-1 ring-white/10"
+                       />
+                     </picture>
                    </div>
                    <div className="leading-tight">
                      <div className="text-xl font-semibold">{profile.name}</div>

@@ -39,9 +39,22 @@ export const Projects = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {profile.projects.map((project, index) => (
             <Card key={index} className="group overflow-hidden border-none bg-card/50 hover:bg-card/80 transition-all p-0 flex flex-col h-full">
-              {/* Placeholder for Project Image */}
-              <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative group-hover:opacity-90 transition-opacity flex items-center justify-center">
-                 <Code2 className="w-16 h-16 text-white/10" />
+              {/* Project thumbnail */}
+              <div className="aspect-video relative overflow-hidden group-hover:opacity-95 transition-opacity">
+                 {('thumbnail' in (project as any)) ? (
+                   <img
+                     src={(project as any).thumbnail}
+                     alt={`${project.title} preview`}
+                     className="h-full w-full object-cover"
+                     loading="lazy"
+                   />
+                 ) : (
+                   <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                     <Code2 className="w-16 h-16 text-white/10" />
+                   </div>
+                 )}
+
+                 {/* Overlay for CTA */}
                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity gap-4 bg-black/40 backdrop-blur-sm">
                     <Button
                       size="sm"

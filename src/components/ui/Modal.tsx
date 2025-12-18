@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -31,6 +31,8 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 export const Modal = ({ open, title, description, onClose, children, className }: ModalProps) => {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const lastActiveRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
+  const descriptionId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -42,6 +44,42 @@ export const Modal = ({ open, title, description, onClose, children, className }
       if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
+      }
+
+      // Basic focus trap: keep Tab focus inside the modal while open.
+      if (e.key === 'Tab') {
+        const panel = panelRef.current;
+        if (!panel) return;
+
+        const focusables = getFocusableElements(panel);
+        if (focusables.length === 0) {
+          e.preventDefault();
+          panel.focus();
+          return;
+        }
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+
+        // If focus somehow escapes, pull it back in.
+        if (!active || !panel.contains(active)) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+          return;
+        }
+
+        if (e.shiftKey) {
+          if (active === first || active === panel) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (active === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
       }
     };
 
@@ -88,7 +126,8 @@ export const Modal = ({ open, title, description, onClose, children, className }
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label={title}
+            aria-labelledby={titleId}
+            aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
             className={cn(
               "relative w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl",
@@ -103,9 +142,9 @@ export const Modal = ({ open, title, description, onClose, children, className }
           >
             <div className="flex items-start justify-between gap-4 p-6 border-b border-white/10">
               <div className="space-y-1">
-                <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
+                <h2 id={titleId} className="text-xl md:text-2xl font-bold">{title}</h2>
                 {description ? (
-                  <p className="text-sm text-muted-foreground">{description}</p>
+                  <p id={descriptionId} className="text-sm text-muted-foreground">{description}</p>
                 ) : null}
               </div>
               <button
