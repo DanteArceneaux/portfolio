@@ -12,7 +12,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variants = {
       primary: 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20',
       secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-      outline: 'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',
+      // Use an explicit border color (we don't have a Tailwind "input" token configured)
+      outline: 'border border-white/10 bg-transparent hover:bg-accent hover:text-accent-foreground hover:border-white/20',
       ghost: 'hover:bg-accent hover:text-accent-foreground',
     };
 

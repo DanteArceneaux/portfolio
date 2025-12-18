@@ -50,8 +50,8 @@ export const About = () => {
                     <div className="text-sm text-muted-foreground">Years Experience</div>
                 </Card>
                 <Card className="p-4 text-center bg-secondary/50 border-none">
-                    <div className="text-3xl font-bold text-primary">100%</div>
-                    <div className="text-sm text-muted-foreground">Job Success</div>
+                    <div className="text-3xl font-bold text-primary">F500</div>
+                    <div className="text-sm text-muted-foreground">Enterprise Experience</div>
                 </Card>
                 <Card className="p-4 text-center bg-secondary/50 border-none">
                     <div className="text-3xl font-bold text-primary">J.D.</div>

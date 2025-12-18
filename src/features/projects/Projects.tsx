@@ -1,10 +1,31 @@
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { Modal } from '@/components/ui/Modal';
 import { profile } from '@/data/profile';
-import { Github, ExternalLink, Code2 } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Code2, Play } from 'lucide-react';
+import { AnalyticsDashboardDemo } from '@/features/projects/demos/AnalyticsDashboardDemo';
+import { LandingLeadFormDemo } from '@/features/projects/demos/LandingLeadFormDemo';
 
 export const Projects = () => {
+  type DemoId = 'dashboard' | 'landing';
+  type Project = (typeof profile.projects)[number] & { demoId: DemoId };
+
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  const Demo = useMemo(() => {
+    if (!activeProject) return null;
+    switch (activeProject.demoId) {
+      case 'dashboard':
+        return <AnalyticsDashboardDemo />;
+      case 'landing':
+        return <LandingLeadFormDemo />;
+      default:
+        return null;
+    }
+  }, [activeProject]);
+
   return (
     <Section id="projects" className="bg-secondary/20">
       <div className="space-y-12">
@@ -22,11 +43,14 @@ export const Projects = () => {
               <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative group-hover:opacity-90 transition-opacity flex items-center justify-center">
                  <Code2 className="w-16 h-16 text-white/10" />
                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity gap-4 bg-black/40 backdrop-blur-sm">
-                    <a href={project.demo} className="pointer-events-auto">
-                        <Button size="sm" variant="secondary" className="gap-2">
-                            <ExternalLink className="w-4 h-4" /> Live Demo
-                        </Button>
-                    </a>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      className="gap-2 pointer-events-auto"
+                      onClick={() => setActiveProject(project as Project)}
+                    >
+                      <Play className="w-4 h-4" /> Open Demo
+                    </Button>
                  </div>
               </div>
               
@@ -34,9 +58,6 @@ export const Projects = () => {
                 <div className="space-y-2">
                     <div className="flex justify-between items-start">
                         <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                            <Github className="w-5 h-5" />
-                        </a>
                     </div>
                     <p className="text-muted-foreground">{project.description}</p>
                 </div>
@@ -64,11 +85,30 @@ export const Projects = () => {
                     </span>
                   ))}
                 </div>
+
+                <div className="pt-2">
+                  <Button
+                    variant="outline"
+                    className="w-full gap-2 md:hidden"
+                    onClick={() => setActiveProject(project as Project)}
+                  >
+                    <Play className="w-4 h-4" /> Open Demo
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
         </div>
       </div>
+
+      <Modal
+        open={!!activeProject}
+        title={activeProject?.title ?? 'Project Demo'}
+        description="These are lightweight, interactive demos embedded directly into my portfolio."
+        onClose={() => setActiveProject(null)}
+      >
+        {Demo}
+      </Modal>
     </Section>
   );
 };

@@ -81,9 +81,11 @@ export const Hero = () => {
                 Hire Me on Fiverr <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
-            <Button variant="outline" size="lg" className="gap-2">
-              View Portfolio <Terminal className="w-4 h-4" />
-            </Button>
+            <a href="#projects">
+              <Button variant="outline" size="lg" className="gap-2">
+                View Portfolio <Terminal className="w-4 h-4" />
+              </Button>
+            </a>
           </motion.div>
         </div>
 

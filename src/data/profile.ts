@@ -2,11 +2,11 @@ export const profile = {
   name: "Dante",
   handle: "@dominerex",
   title: "Front End Dev",
-  location: "Thailand",
+  location: "Federal Way, WA • Remote",
   languages: ["English"],
   headline: "The \"J.D.\" Developer | Precision & Speed",
   bio: [
-    "I am a US-based developer (WA State) with a Law background (J.D., Univ. of Michigan). I bring strict legal precision to your code.",
+    "I am a US-based developer (Washington State) with a Law background (J.D., Univ. of Michigan). I bring strict legal precision to your code.",
     "I specialize in Rapid UI Conversions. I turn designs, screenshots, or ideas into production-ready React & Tailwind apps in record time."
   ],
   whyHireMe: [
@@ -38,7 +38,7 @@ export const profile = {
   services: [
     {
       title: "Rapid UI Conversion",
-      price: "Starting at $XX",
+      price: "From $99",
       description: "I convert your Figma designs, screenshots, or sketches into pixel-perfect, responsive React & Tailwind code.",
       deliverables: [
         "Component-based Architecture",
@@ -51,7 +51,7 @@ export const profile = {
     },
     {
       title: "Landing Page Build",
-      price: "Starting at $XX",
+      price: "From $249",
       description: "A complete, high-converting landing page built for speed and SEO.",
       deliverables: [
         "All 'Rapid UI' features",
@@ -64,7 +64,7 @@ export const profile = {
     },
     {
       title: "Bug Fix & Refactor",
-      price: "Starting at $XX",
+      price: "From $79",
       description: "I will audit your code, fix specific bugs, or refactor for better performance and maintainability.",
       deliverables: [
         "Code Audit & Report",
@@ -83,8 +83,12 @@ export const profile = {
       description: "A high-performance dashboard for visualizing complex datasets.",
       challenge: "Rendering large datasets without UI lag while maintaining mobile responsiveness.",
       solution: "Implemented virtualized lists and optimized re-renders for smooth performance.",
-      demo: "#", // Placeholder
-      github: "#" // Placeholder
+      demoId: "dashboard",
+      highlights: [
+        "Timeframe toggle (7/30/90 days)",
+        "SVG chart rendering (no chart library)",
+        "Sortable 'Top Pages' table"
+      ]
     },
     {
       title: "Marketing Landing Page",
@@ -92,8 +96,12 @@ export const profile = {
       description: "A high-conversion landing page with scroll-triggered animations.",
       challenge: "Creating engaging animations that don't compromise load speed.",
       solution: "Used Framer Motion for hardware-accelerated animations and lazy-loading assets.",
-      demo: "#", // Placeholder
-      github: "#" // Placeholder
+      demoId: "landing",
+      highlights: [
+        "Accessible lead form with validation",
+        "Async submit + success state",
+        "Mobile-first layout"
+      ]
     }
   ],
   experience: [
@@ -148,7 +156,7 @@ export const profile = {
   socials: {
     fiverr: "https://www.fiverr.com/dominerex",
     github: "https://github.com/DanteArceneaux", // Updated based on repo URL
-    linkedin: "https://linkedin.com/in/dantearceneaux", // Assumed pattern, placeholder if unknown
-    email: "mailto:contact@dantearceneaux.com" // Placeholder
+    linkedin: "https://www.linkedin.com/in/dante-arceneaux-90269247/",
+    email: "" // Optional; add a mailto: link if you want direct contact outside Fiverr.
   }
 };
