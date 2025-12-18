@@ -6,7 +6,8 @@ import { ArrowRight, BadgeCheck, Building2, ChevronDown, Scale } from 'lucide-re
 
 export const Hero = () => {
   // Served from /public so it has a stable URL (also used by social previews).
-  const headshotPng = '/headshot.png';
+  // Use a smaller PNG fallback (Safari / non-WebP) for better performance.
+  const headshotPng = '/headshot-512.png';
   const headshotWebp = '/headshot.webp';
 
   return (

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
 import { cn } from '@/lib/utils';
+import { useActiveSection } from '@/lib/useActiveSection';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -24,6 +25,8 @@ export const Navbar = () => {
     { name: 'Experience', href: '#experience' },
   ];
 
+  const activeSection = useActiveSection(navLinks.map((l) => l.href.replace('#', '')));
+
   return (
     <>
       <header
@@ -45,9 +48,22 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                aria-current={activeSection === link.href.replace('#', '') ? 'page' : undefined}
+                className={cn(
+                  "text-sm font-medium transition-colors relative",
+                  activeSection === link.href.replace('#', '')
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
               >
                 {link.name}
+                <span
+                  className={cn(
+                    "absolute -bottom-2 left-0 h-0.5 w-full rounded-full bg-primary transition-opacity",
+                    activeSection === link.href.replace('#', '') ? "opacity-100" : "opacity-0"
+                  )}
+                  aria-hidden="true"
+                />
               </a>
             ))}
             <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
@@ -79,7 +95,13 @@ export const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-2xl font-bold hover:text-primary transition-colors"
+                aria-current={activeSection === link.href.replace('#', '') ? 'page' : undefined}
+                className={cn(
+                  "text-2xl font-bold transition-colors",
+                  activeSection === link.href.replace('#', '')
+                    ? "text-primary"
+                    : "hover:text-primary"
+                )}
               >
                 {link.name}
               </a>

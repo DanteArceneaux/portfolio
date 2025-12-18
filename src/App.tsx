@@ -13,9 +13,12 @@ import { Footer } from '@/components/layout/Footer';
 function App() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Navbar />
       {/* Add bottom padding on mobile so content isn't hidden behind the sticky CTA */}
-      <main className="pb-20 md:pb-0">
+      <main id="main" className="pb-20 md:pb-0">
         <Hero />
         <About />
         <Services />

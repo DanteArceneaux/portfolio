@@ -1,4 +1,6 @@
-export const profile = {
+import type { Profile } from './profile.types';
+
+export const profile: Profile = {
   name: "Dante",
   handle: "@dominerex",
   title: "Front End Dev",

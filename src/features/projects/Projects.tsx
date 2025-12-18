@@ -3,27 +3,33 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { profile } from '@/data/profile';
-import { useMemo, useState } from 'react';
-import { CheckCircle2, Code2, Play } from 'lucide-react';
-import { AnalyticsDashboardDemo } from '@/features/projects/demos/AnalyticsDashboardDemo';
-import { LandingLeadFormDemo } from '@/features/projects/demos/LandingLeadFormDemo';
+import type { Project, ProjectDemoId } from '@/data/profile.types';
+import { lazy, Suspense, useMemo, useState, type ComponentType, type LazyExoticComponent } from 'react';
+import { CheckCircle2, Play } from 'lucide-react';
+
+// Lazy-load demos so your initial bundle stays lean (especially important for Fiverr traffic).
+const AnalyticsDashboardDemoLazy = lazy(() =>
+  import('@/features/projects/demos/AnalyticsDashboardDemo').then((m) => ({ default: m.AnalyticsDashboardDemo }))
+);
+const LandingLeadFormDemoLazy = lazy(() =>
+  import('@/features/projects/demos/LandingLeadFormDemo').then((m) => ({ default: m.LandingLeadFormDemo }))
+);
 
 export const Projects = () => {
-  type DemoId = 'dashboard' | 'landing';
-  type Project = (typeof profile.projects)[number] & { demoId: DemoId };
+  const projects: Project[] = profile.projects;
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
-  const Demo = useMemo(() => {
+  type DemoComponent = LazyExoticComponent<ComponentType<Record<string, never>>>;
+
+  const demoRegistry: Record<ProjectDemoId, DemoComponent> = {
+    dashboard: AnalyticsDashboardDemoLazy as DemoComponent,
+    landing: LandingLeadFormDemoLazy as DemoComponent,
+  };
+
+  const DemoComponent = useMemo(() => {
     if (!activeProject) return null;
-    switch (activeProject.demoId) {
-      case 'dashboard':
-        return <AnalyticsDashboardDemo />;
-      case 'landing':
-        return <LandingLeadFormDemo />;
-      default:
-        return null;
-    }
+    return demoRegistry[activeProject.demoId];
   }, [activeProject]);
 
   return (
@@ -37,22 +43,23 @@ export const Projects = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {profile.projects.map((project, index) => (
+          {projects.map((project, index) => (
             <Card key={index} className="group overflow-hidden border-none bg-card/50 hover:bg-card/80 transition-all p-0 flex flex-col h-full">
               {/* Project thumbnail */}
               <div className="aspect-video relative overflow-hidden group-hover:opacity-95 transition-opacity">
-                 {('thumbnail' in (project as any)) ? (
+                 <picture>
+                   <source
+                     srcSet={project.thumbnail.replace(/\.png$/i, '.webp')}
+                     type="image/webp"
+                   />
                    <img
-                     src={(project as any).thumbnail}
+                     src={project.thumbnail}
                      alt={`${project.title} preview`}
                      className="h-full w-full object-cover"
                      loading="lazy"
+                     decoding="async"
                    />
-                 ) : (
-                   <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                     <Code2 className="w-16 h-16 text-white/10" />
-                   </div>
-                 )}
+                 </picture>
 
                  {/* Overlay for CTA */}
                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity gap-4 bg-black/40 backdrop-blur-sm">
@@ -60,7 +67,7 @@ export const Projects = () => {
                       size="sm"
                       variant="secondary"
                       className="gap-2 pointer-events-auto"
-                      onClick={() => setActiveProject(project as Project)}
+                      onClick={() => setActiveProject(project)}
                     >
                       <Play className="w-4 h-4" /> Open Demo
                     </Button>
@@ -75,13 +82,13 @@ export const Projects = () => {
                     <p className="text-muted-foreground">{project.description}</p>
                 </div>
 
-                {Array.isArray((project as any).highlights) && (project as any).highlights.length > 0 ? (
+                {project.highlights.length > 0 ? (
                   <div className="space-y-2">
                     <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
                       Highlights
                     </div>
                     <ul className="space-y-1 text-sm text-muted-foreground">
-                      {(project as any).highlights.slice(0, 3).map((h: string) => (
+                      {project.highlights.slice(0, 3).map((h) => (
                         <li key={h} className="flex items-start gap-2">
                           <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
                           <span>{h}</span>
@@ -119,7 +126,7 @@ export const Projects = () => {
                   <Button
                     variant="outline"
                     className="w-full gap-2 md:hidden"
-                    onClick={() => setActiveProject(project as Project)}
+                    onClick={() => setActiveProject(project)}
                   >
                     <Play className="w-4 h-4" /> Open Demo
                   </Button>
@@ -136,7 +143,17 @@ export const Projects = () => {
         description="These are lightweight, interactive demos embedded directly into my portfolio."
         onClose={() => setActiveProject(null)}
       >
-        {Demo}
+        {DemoComponent ? (
+          <Suspense
+            fallback={
+              <div className="text-sm text-muted-foreground">
+                Loading demo…
+              </div>
+            }
+          >
+            <DemoComponent />
+          </Suspense>
+        ) : null}
       </Modal>
     </Section>
   );

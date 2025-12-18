@@ -2,12 +2,13 @@ import { useId, useState } from 'react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { profile } from '@/data/profile';
+import type { FaqItem } from '@/data/profile.types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const Faq = () => {
-  const faq = profile.faq ?? [];
+  const faq: FaqItem[] = profile.faq ?? [];
   const baseId = useId();
 
   // Keep it simple: one open at a time (best for scanning)
@@ -24,7 +25,7 @@ export const Faq = () => {
         </div>
 
         <div className="space-y-4">
-          {faq.map((item: any, index: number) => {
+          {faq.map((item, index) => {
             const isOpen = index === openIndex;
             const buttonId = `${baseId}-faq-btn-${index}`;
             const panelId = `${baseId}-faq-panel-${index}`;
@@ -75,5 +76,6 @@ export const Faq = () => {
     </Section>
   );
 };
+
 
 

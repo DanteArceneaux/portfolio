@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
@@ -26,6 +31,41 @@
 
     <!-- Canonical -->
     <link rel="canonical" href="https://dantearceneaux.dev/" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "Dante Arceneaux | The J.D. Developer",
+            "url": "https://dantearceneaux.dev/"
+          },
+          {
+            "@type": "Person",
+            "name": "Dante Arceneaux",
+            "url": "https://dantearceneaux.dev/",
+            "jobTitle": "Front End Developer",
+            "sameAs": [
+              "https://www.fiverr.com/dominerex",
+              "https://github.com/DanteArceneaux",
+              "https://www.linkedin.com/in/dante-arceneaux-90269247/"
+            ],
+            "alumniOf": [
+              {
+                "@type": "CollegeOrUniversity",
+                "name": "University of Michigan"
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                "name": "Western Michigan University"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
 
   </head>
   <body>

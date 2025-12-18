@@ -2,10 +2,11 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
+import type { ProcessStep } from '@/data/profile.types';
 import { CheckCircle2, Clock, Send } from 'lucide-react';
 
 export const Process = () => {
-  const steps = profile.processSteps ?? [];
+  const steps: ProcessStep[] = profile.processSteps ?? [];
 
   const icons = [Send, Clock, CheckCircle2] as const;
 
@@ -20,7 +21,7 @@ export const Process = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {steps.map((step: any, index: number) => {
+          {steps.map((step, index) => {
             const Icon = icons[index] ?? CheckCircle2;
             return (
               <Card key={step.title} className="space-y-4 border-white/10">
@@ -61,5 +62,6 @@ export const Process = () => {
     </Section>
   );
 };
+
 
 

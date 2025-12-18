@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="30%" cy="25%" r="70%">
+      <stop offset="0" stop-color="#3b82f6" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="#0a0a0a"/>
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="url(#bgGlow)"/>
+
+  <circle cx="128" cy="128" r="92" fill="none" stroke="url(#g)" stroke-width="10" opacity="0.95"/>
+
+  <!-- Simple, font-free “D” mark using even-odd fill -->
+  <path fill="#ededed" fill-rule="evenodd" d="
+    M 78 60
+    H 150
+    C 198 60 222 84 222 128
+    C 222 172 198 196 150 196
+    H 78
+    Z
+
+    M 118 92
+    H 146
+    C 170 92 186 106 186 128
+    C 186 150 170 164 146 164
+    H 118
+    Z
+  "/>
+</svg>
+
+
