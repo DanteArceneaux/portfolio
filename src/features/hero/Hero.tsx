@@ -1,11 +1,13 @@
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
-import headshotUrl from '@/assets/headshot.png';
 import { motion } from 'framer-motion';
 import { ArrowRight, Terminal, Scale } from 'lucide-react';
 
 export const Hero = () => {
+  // Served from /public so it has a stable URL (also used by social previews).
+  const headshotUrl = '/headshot.png';
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Background Abstract Elements */}

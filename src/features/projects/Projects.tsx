@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { profile } from '@/data/profile';
 import { useMemo, useState } from 'react';
-import { Code2, Play } from 'lucide-react';
+import { CheckCircle2, Code2, Play } from 'lucide-react';
 import { AnalyticsDashboardDemo } from '@/features/projects/demos/AnalyticsDashboardDemo';
 import { LandingLeadFormDemo } from '@/features/projects/demos/LandingLeadFormDemo';
 
@@ -61,6 +61,22 @@ export const Projects = () => {
                     </div>
                     <p className="text-muted-foreground">{project.description}</p>
                 </div>
+
+                {Array.isArray((project as any).highlights) && (project as any).highlights.length > 0 ? (
+                  <div className="space-y-2">
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                      Highlights
+                    </div>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      {(project as any).highlights.slice(0, 3).map((h: string) => (
+                        <li key={h} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
 
                 <div className="space-y-4 flex-grow">
                     <div className="grid grid-cols-1 gap-4 text-sm">

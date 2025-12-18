@@ -79,10 +79,11 @@ export const profile = {
   projects: [
     {
       title: "SaaS Analytics Dashboard",
-      tech: ["React", "Tailwind", "Recharts"],
+      // Note: chart is rendered with SVG (intentionally no chart library for this lightweight demo)
+      tech: ["React", "TypeScript", "Tailwind", "SVG"],
       description: "A high-performance dashboard for visualizing complex datasets.",
       challenge: "Rendering large datasets without UI lag while maintaining mobile responsiveness.",
-      solution: "Implemented virtualized lists and optimized re-renders for smooth performance.",
+      solution: "Built a lightweight, interactive dashboard with SVG charting and a sortable table to demonstrate state + UI performance patterns.",
       demoId: "dashboard",
       highlights: [
         "Timeframe toggle (7/30/90 days)",
@@ -92,10 +93,10 @@ export const profile = {
     },
     {
       title: "Marketing Landing Page",
-      tech: ["React", "Framer Motion", "Vite"],
+      tech: ["React", "TypeScript", "Tailwind", "Framer Motion"],
       description: "A high-conversion landing page with scroll-triggered animations.",
       challenge: "Creating engaging animations that don't compromise load speed.",
-      solution: "Used Framer Motion for hardware-accelerated animations and lazy-loading assets.",
+      solution: "Added polished micro-animations and an accessible lead form with validation, loading, and a clean success state.",
       demoId: "landing",
       highlights: [
         "Accessible lead form with validation",

@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { CheckCircle2, Mail, Sparkles, User } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 type FormState = {
   name: string;
@@ -96,13 +97,18 @@ export const LandingLeadFormDemo = () => {
               <span className="text-primary font-semibold">Responsive</span>
             </div>
 
-            <h4 className="text-3xl font-bold tracking-tight">
+            <motion.h4
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className="text-3xl font-bold tracking-tight"
+            >
               Get a pixel‑perfect React + Tailwind build
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
                 {' '}
                 in days.
               </span>
-            </h4>
+            </motion.h4>
             <p className="text-muted-foreground">
               Share your Figma or screenshots. I’ll deliver a clean, maintainable build with semantic HTML, responsive layout, and
               a professional handoff.
@@ -128,10 +134,15 @@ export const LandingLeadFormDemo = () => {
         <Card hover={false} className="border-white/10">
           {status === 'success' ? (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-green-400">
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-center gap-2 text-green-400"
+              >
                 <CheckCircle2 className="h-6 w-6" />
                 <div className="text-lg font-semibold">Request received!</div>
-              </div>
+              </motion.div>
               <p className="text-sm text-muted-foreground">
                 This is a demo success state. In a real project, this would send to Netlify Forms, a serverless function, or your API.
               </p>
