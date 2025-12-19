@@ -37,7 +37,7 @@ export const Hero = () => {
                   height={56}
                   loading="eager"
                   decoding="async"
-                  className="relative w-14 h-14 rounded-full object-cover ring-1 ring-white/10"
+                  className="relative w-14 h-14 rounded-full object-cover object-top ring-1 ring-white/10"
                 />
               </picture>
             </div>
@@ -148,7 +148,7 @@ export const Hero = () => {
                          height={80}
                          loading="lazy"
                          decoding="async"
-                         className="relative w-20 h-20 rounded-full object-cover ring-1 ring-white/10"
+                         className="relative w-20 h-20 rounded-full object-cover object-top ring-1 ring-white/10"
                        />
                      </picture>
                    </div>
@@ -165,23 +165,32 @@ export const Hero = () => {
                         <span className="text-white">=</span>
                         <span className="text-white">{`{`}</span>
                     </div>
-                    <div className="pl-4 flex gap-2">
-                        <span className="text-primary">name:</span>
-                        <span className="text-green-300">"Dante"</span>,
-                    </div>
-                    <div className="pl-4 flex gap-2">
-                        <span className="text-primary">background:</span>
-                        <span className="text-green-300">"J.D. Law"</span>,
-                    </div>
-                    <div className="pl-4 flex gap-2">
-                        <span className="text-primary">stack:</span>
-                        <span className="text-white">["React", "Tailwind"]</span>,
-                    </div>
-                    <div className="pl-4 flex gap-2">
-                        <span className="text-primary">speed:</span>
-                        <span className="text-green-300">"3x Faster"</span>
-                    </div>
-                    <div className="text-white">{`}`}</div>
+                    {[
+                      { key: 'name', value: '"Dante"' },
+                      { key: 'background', value: '"J.D. Law"' },
+                      { key: 'stack', value: '["React", "Tailwind"]', isArray: true },
+                      { key: 'speed', value: '"3x Faster"' },
+                    ].map((line, i) => (
+                      <motion.div
+                        key={line.key}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1 + i * 0.15 }}
+                        className="pl-4 flex gap-2"
+                      >
+                        <span className="text-primary">{line.key}:</span>
+                        <span className={line.isArray ? "text-white" : "text-green-300"}>{line.value}</span>
+                        {!line.isArray && ','}
+                      </motion.div>
+                    ))}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.6 }}
+                      className="text-white"
+                    >
+                      {`}`}
+                    </motion.div>
                  </div>
               </div>
            </div>
