@@ -6,6 +6,7 @@ import { profile } from '@/data/profile';
 import type { Project, ProjectDemoId } from '@/data/profile.types';
 import { lazy, Suspense, useMemo, useState, type ComponentType, type LazyExoticComponent } from 'react';
 import { ArrowUpRight, CheckCircle2, Clipboard, Play } from 'lucide-react';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 // Lazy-load demos so your initial bundle stays lean (especially important for Fiverr traffic).
 const AnalyticsDashboardDemoLazy = lazy(() =>
@@ -67,12 +68,11 @@ export const Projects = () => {
   return (
     <Section id="projects">
       <div className="space-y-12">
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold">Selected Work</h2>
-          <p className="text-muted-foreground text-lg">
-            Real-world problems solved with clean, maintainable code.
-          </p>
-        </div>
+        <SectionTitle
+          title="Selected Work"
+          subtitle="Real-world problems solved with clean, maintainable code."
+          className="max-w-3xl mx-auto"
+        />
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (

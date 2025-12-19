@@ -1,12 +1,13 @@
 import { Section } from '@/components/ui/Section';
 import { profile } from '@/data/profile';
 import { motion } from 'framer-motion';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 export const Skills = () => {
   return (
     <Section id="skills">
       <div className="space-y-8">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-center">Technical Arsenal</h2>
+        <SectionTitle title="Technical Arsenal" />
         
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
           {profile.skills.map((skill, index) => (

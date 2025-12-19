@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { profile } from '@/data/profile';
 import type { FaqItem } from '@/data/profile.types';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -17,12 +18,10 @@ export const Faq = () => {
   return (
     <Section id="faq">
       <div className="space-y-12 max-w-4xl mx-auto">
-        <div className="text-center space-y-4">
-          <h2 className="text-3xl md:text-4xl font-display font-bold">FAQ</h2>
-          <p className="text-muted-foreground text-lg">
-            Quick answers to the questions clients ask most often.
-          </p>
-        </div>
+        <SectionTitle
+          title="FAQ"
+          subtitle="Quick answers to the questions clients ask most often."
+        />
 
         <div className="space-y-4">
           {faq.map((item, index) => {

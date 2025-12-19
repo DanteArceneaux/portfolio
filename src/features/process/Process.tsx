@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
 import type { ProcessStep } from '@/data/profile.types';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 import { CheckCircle2, Clock, Send } from 'lucide-react';
 
 export const Process = () => {
@@ -14,12 +15,11 @@ export const Process = () => {
   return (
     <Section id="process">
       <div className="space-y-12">
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold">A Simple, Fast Process</h2>
-          <p className="text-muted-foreground text-lg">
-            Clear scope, quick first draft, and a clean handoff. No chaos.
-          </p>
-        </div>
+        <SectionTitle
+          title="A Simple, Fast Process"
+          subtitle="Clear scope, quick first draft, and a clean handoff. No chaos."
+          className="max-w-3xl mx-auto"
+        />
 
         <div className="grid md:grid-cols-3 gap-6">
           {steps.map((step, index) => {

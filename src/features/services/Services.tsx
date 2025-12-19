@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
 import { RiskReversal } from '@/components/conversion/RiskReversal';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Check, Clock, Zap } from 'lucide-react';
 
 export const Services = () => {
@@ -11,12 +12,12 @@ export const Services = () => {
   return (
     <Section id="services">
       <div className="space-y-12">
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold">Services & Packages</h2>
-          <p className="text-muted-foreground text-lg">
-            Production-ready code delivered with legal precision.
-          </p>
-          <RiskReversal className="pt-2 text-left sm:text-center" />
+        <div className="space-y-4 max-w-3xl mx-auto">
+          <SectionTitle
+            title="Services & Packages"
+            subtitle="Production-ready code delivered with legal precision."
+          />
+          <RiskReversal className="pt-1 text-left sm:text-center" />
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

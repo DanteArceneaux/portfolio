@@ -43,7 +43,8 @@
    * Subtle gradient divider between sections with primary accent
    */
   .section-divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-primary/15 to-transparent;
+    /* On mobile, section spacing is enough — hide dividers to reduce visual noise */
+    @apply hidden md:block h-px w-full bg-gradient-to-r from-transparent via-primary/15 to-transparent;
   }
 }
 
