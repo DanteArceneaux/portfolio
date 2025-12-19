@@ -213,6 +213,9 @@ export const profile: Profile = {
   ],
   socials: {
     fiverr: "https://www.fiverr.com/dominerex",
+    // Optional: set this to your primary Fiverr gig deep-link for higher conversion.
+    // Example: "https://www.fiverr.com/dominerex/your-gig-slug"
+    fiverrGig: "https://www.fiverr.com/dominerex",
     github: "https://github.com/DanteArceneaux", // Updated based on repo URL
     linkedin: "https://www.linkedin.com/in/dante-arceneaux-90269247/",
     email: "" // Optional; add a mailto: link if you want direct contact outside Fiverr.
