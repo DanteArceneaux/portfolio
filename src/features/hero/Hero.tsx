@@ -18,7 +18,7 @@ export const Hero = () => {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[100px]" />
       </div>
 
-      <Section className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+      <Section className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
         <div className="space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -124,9 +124,9 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative hidden md:block"
+          className="relative hidden lg:block"
         >
-           <div className="relative w-full aspect-square max-w-md mx-auto">
+           <div className="relative w-full aspect-square max-w-md mx-auto mt-12 lg:mt-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full opacity-20 blur-3xl animate-pulse" />
               {/* Placeholder for Profile Image - using a div for now or an abstract code block */}
               <div className="relative w-full h-full bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl">
