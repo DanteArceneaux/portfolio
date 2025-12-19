@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
         background: '#0a0a0a',
         foreground: '#ededed',
@@ -15,7 +19,7 @@ export default {
         },
         secondary: {
           DEFAULT: '#1e1e1e',
-          foreground: '#a1a1aa',
+          foreground: '#b4b4bc', // Improved contrast (was #a1a1aa)
         },
         accent: {
           DEFAULT: '#8b5cf6', // Violet
@@ -23,7 +27,7 @@ export default {
         },
         muted: {
           DEFAULT: '#27272a',
-          foreground: '#a1a1aa',
+          foreground: '#b4b4bc', // Improved contrast for WCAG AAA (was #a1a1aa)
         },
         card: {
             DEFAULT: '#121212',

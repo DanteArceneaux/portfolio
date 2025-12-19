@@ -24,7 +24,7 @@ export const Experience = () => {
         <div className="space-y-8">
           <div className="flex items-center gap-3">
             <Briefcase className="w-6 h-6 text-primary" />
-            <h2 className="text-3xl font-bold">Experience</h2>
+            <h2 className="text-3xl font-display font-bold">Experience</h2>
           </div>
 
           <div className="space-y-6">
@@ -98,7 +98,7 @@ export const Experience = () => {
           <div className="space-y-8">
              <div className="flex items-center gap-3">
                 <GraduationCap className="w-6 h-6 text-accent" />
-                <h2 className="text-3xl font-bold">Education</h2>
+                <h2 className="text-3xl font-display font-bold">Education</h2>
              </div>
              <div className="space-y-4">
                 {profile.education.map((edu, index) => (
@@ -119,7 +119,7 @@ export const Experience = () => {
           <div className="space-y-8">
              <div className="flex items-center gap-3">
                 <Award className="w-6 h-6 text-yellow-500" />
-                <h2 className="text-3xl font-bold">Certifications</h2>
+                <h2 className="text-3xl font-display font-bold">Certifications</h2>
              </div>
              <div className="space-y-4">
                 {profile.certifications.map((cert, index) => (

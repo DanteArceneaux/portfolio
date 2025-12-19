@@ -98,7 +98,7 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
           <div className="flex flex-col sm:flex-row gap-2">
             <Button variant="outline" className="gap-2" onClick={copyMessage}>
               <Clipboard className="h-4 w-4" />
-              {copied ? 'Copied' : 'Copy message'}
+              <span aria-live="polite">{copied ? 'Copied' : 'Copy message'}</span>
             </Button>
             <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
               <Button className="gap-2 w-full sm:w-auto">
@@ -121,11 +121,14 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
 
           <div className="mt-5 space-y-5">
             <div className="space-y-2">
-              <div className="text-sm font-semibold">Project type</div>
+              <label htmlFor="qq-project-type" className="text-sm font-semibold block">
+                Project type
+              </label>
               <select
+                id="qq-project-type"
                 className={cn(
                   "w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                 )}
                 value={projectType}
                 onChange={(e) => setProjectType(e.target.value as ProjectType)}
@@ -140,11 +143,14 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <div className="text-sm font-semibold">Design source</div>
+                <label htmlFor="qq-design-source" className="text-sm font-semibold block">
+                  Design source
+                </label>
                 <select
+                  id="qq-design-source"
                   className={cn(
                     "w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                   )}
                   value={designSource}
                   onChange={(e) => setDesignSource(e.target.value as DesignSource)}
@@ -158,11 +164,14 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
               </div>
 
               <div className="space-y-2">
-                <div className="text-sm font-semibold">Deadline</div>
+                <label htmlFor="qq-deadline" className="text-sm font-semibold block">
+                  Deadline
+                </label>
                 <select
+                  id="qq-deadline"
                   className={cn(
                     "w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                   )}
                   value={deadline}
                   onChange={(e) => setDeadline(e.target.value as Deadline)}
@@ -174,9 +183,12 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <div className="text-sm font-semibold">Sections/pages</div>
+              <label htmlFor="qq-pages" className="text-sm font-semibold block">
+                Sections/pages
+              </label>
               <div className="flex items-center gap-3">
                 <input
+                  id="qq-pages"
                   type="range"
                   min={1}
                   max={12}
@@ -184,7 +196,7 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
                   onChange={(e) => setPagesOrSections(Number(e.target.value))}
                   className="w-full"
                 />
-                <div className="w-14 text-center rounded-md border border-white/10 bg-white/5 py-2 text-sm font-semibold">
+                <div className="w-14 text-center rounded-md border border-white/10 bg-white/5 py-2 text-sm font-semibold" aria-live="polite">
                   {pagesOrSections}
                 </div>
               </div>
@@ -194,29 +206,35 @@ export const QuickQuoteModal = ({ open, onClose }: QuickQuoteModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <div className="text-sm font-semibold">Design link (optional)</div>
+              <label htmlFor="qq-design-link" className="text-sm font-semibold block">
+                Design link (optional)
+              </label>
               <input
+                id="qq-design-link"
                 type="url"
                 placeholder="Figma link / Drive link / Screenshot link"
                 value={designLink}
                 onChange={(e) => setDesignLink(e.target.value)}
                 className={cn(
                   "w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                 )}
               />
             </div>
 
             <div className="space-y-2">
-              <div className="text-sm font-semibold">Notes (optional)</div>
+              <label htmlFor="qq-notes" className="text-sm font-semibold block">
+                Notes (optional)
+              </label>
               <textarea
+                id="qq-notes"
                 rows={4}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Anything important: brand colors, example sites, must-have sections, etc."
                 className={cn(
                   "w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                 )}
               />
             </div>

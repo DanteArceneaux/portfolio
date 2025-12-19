@@ -21,6 +21,13 @@ export const Hero = () => {
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[100px]" />
+        {/* Noise texture overlay for depth */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
       </div>
 
       <Section className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -69,7 +76,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight leading-tight"
           >
             Legal Precision. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
@@ -160,8 +167,8 @@ export const Hero = () => {
           >
              <div className="relative w-full aspect-square max-w-md mx-auto mt-12 lg:mt-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full opacity-20 blur-3xl animate-pulse" />
-              {/* Placeholder for Profile Image - using a div for now or an abstract code block */}
-              <div className="relative w-full h-full bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl">
+              {/* Code card with glow effect */}
+              <div className="relative w-full h-full bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl shadow-primary/10" style={{ boxShadow: '0 0 80px rgba(59,130,246,0.12), 0 25px 50px -12px rgba(0,0,0,0.25)' }}>
                  <div className="flex items-center gap-2 border-b border-white/10 pb-4">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500" />

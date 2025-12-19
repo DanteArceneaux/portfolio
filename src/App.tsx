@@ -20,12 +20,25 @@ function App() {
       {/* Add bottom padding on mobile so content isn't hidden behind the sticky CTA */}
       <main id="main" className="pb-20 md:pb-0">
         <Hero />
+        <div className="section-divider" />
         <About />
-        <Services />
+        <div className="section-divider" />
+        <div className="bg-secondary/5">
+          <Services />
+        </div>
+        <div className="section-divider" />
         <Process />
-        <Projects />
+        <div className="section-divider" />
+        <div className="bg-secondary/5">
+          <Projects />
+        </div>
+        <div className="section-divider" />
         <Faq />
-        <Skills />
+        <div className="section-divider" />
+        <div className="bg-secondary/5">
+          <Skills />
+        </div>
+        <div className="section-divider" />
         <Experience />
       </main>
       <Footer />

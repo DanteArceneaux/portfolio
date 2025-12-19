@@ -12,7 +12,7 @@ export const Services = () => {
     <Section id="services" className="bg-background">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Services & Packages</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold">Services & Packages</h2>
           <p className="text-muted-foreground text-lg">
             Production-ready code delivered with legal precision.
           </p>

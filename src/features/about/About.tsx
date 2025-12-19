@@ -14,7 +14,7 @@ export const About = () => {
     <Section id="about" className="bg-background">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Why Hire The "J.D." Developer?</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold">Why Hire The "J.D." Developer?</h2>
           <p className="text-muted-foreground text-lg">
             I combine the reliability of a legal professional with the speed of a modern AI-augmented developer.
           </p>

@@ -13,7 +13,7 @@ export const Card = ({ children, className, hover = true, ...props }: CardProps)
     <motion.div
       whileHover={hover ? { y: -5 } : undefined}
       className={cn(
-        "bg-card/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 shadow-xl",
+        "bg-card/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 shadow-xl shadow-black/25",
         className
       )}
       {...props}

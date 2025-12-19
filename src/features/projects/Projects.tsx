@@ -65,10 +65,10 @@ export const Projects = () => {
   }
 
   return (
-    <Section id="projects" className="bg-secondary/20">
+    <Section id="projects">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Selected Work</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold">Selected Work</h2>
           <p className="text-muted-foreground text-lg">
             Real-world problems solved with clean, maintainable code.
           </p>
@@ -87,7 +87,7 @@ export const Projects = () => {
                    <img
                      src={project.thumbnail}
                      alt={`${project.title} preview`}
-                     className="h-full w-full object-cover"
+                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                      loading="lazy"
                      decoding="async"
                    />
@@ -184,7 +184,7 @@ export const Projects = () => {
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button variant="outline" className="gap-2" onClick={copyRequirements}>
                   <Clipboard className="h-4 w-4" />
-                  {copied ? 'Copied' : 'Copy requirements'}
+                  <span aria-live="polite">{copied ? 'Copied' : 'Copy requirements'}</span>
                 </Button>
                 <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
                   <Button className="gap-2 w-full sm:w-auto">

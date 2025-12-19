@@ -155,9 +155,10 @@ export const ScopeBuilderDemo = () => {
 
               {step === 1 ? (
                 <>
-                  <FieldLabel label="How many sections/pages?" hint="For a landing page, think hero+sections. For a dashboard, think views." />
+                  <FieldLabel label="How many sections/pages?" hint="For a landing page, think hero+sections. For a dashboard, think views." htmlFor="scope-pages" />
                   <div className="flex items-center gap-3">
                     <input
+                      id="scope-pages"
                       type="range"
                       min={1}
                       max={12}
@@ -167,7 +168,7 @@ export const ScopeBuilderDemo = () => {
                       }
                       className="w-full"
                     />
-                    <div className="w-14 text-center rounded-md border border-white/10 bg-white/5 py-2 text-sm font-semibold">
+                    <div className="w-14 text-center rounded-md border border-white/10 bg-white/5 py-2 text-sm font-semibold" aria-live="polite">
                       {state.pagesOrSections}
                     </div>
                   </div>
@@ -268,7 +269,7 @@ export const ScopeBuilderDemo = () => {
             <div className="flex gap-2">
               <Button size="sm" variant="outline" className="gap-2" onClick={copyScope}>
                 <Clipboard className="h-4 w-4" />
-                {copied ? 'Copied' : 'Copy'}
+                <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
               </Button>
               <Button size="sm" variant="outline" className="gap-2" onClick={downloadScope}>
                 <Download className="h-4 w-4" />
@@ -345,10 +346,13 @@ export const ScopeBuilderDemo = () => {
   );
 };
 
-function FieldLabel({ label, hint }: { label: string; hint?: string }) {
+function FieldLabel({ label, hint, htmlFor }: { label: string; hint?: string; htmlFor?: string }) {
+  const LabelTag = htmlFor ? 'label' : 'div';
   return (
     <div className="space-y-1">
-      <div className="text-sm font-semibold">{label}</div>
+      <LabelTag htmlFor={htmlFor} className="text-sm font-semibold block">
+        {label}
+      </LabelTag>
       {hint ? <div className="text-xs text-muted-foreground">{hint}</div> : null}
     </div>
   );

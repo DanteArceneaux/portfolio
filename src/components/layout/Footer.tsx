@@ -5,10 +5,12 @@ export const Footer = () => {
   const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
 
   return (
-    <footer className="py-12 border-t border-white/10 bg-background">
+    <footer className="relative py-12 bg-background">
+      {/* Gradient accent top border */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
-          <h3 className="text-xl font-bold tracking-tight">Dante | The J.D. Developer</h3>
+          <h3 className="text-xl font-display font-bold tracking-tight">Dante | The J.D. Developer</h3>
           <p className="text-sm text-muted-foreground mt-2">
             Legal Precision. Coding Speed.
           </p>

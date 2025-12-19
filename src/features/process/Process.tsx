@@ -15,7 +15,7 @@ export const Process = () => {
     <Section id="process" className="bg-background">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">A Simple, Fast Process</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold">A Simple, Fast Process</h2>
           <p className="text-muted-foreground text-lg">
             Clear scope, quick first draft, and a clean handoff. No chaos.
           </p>
