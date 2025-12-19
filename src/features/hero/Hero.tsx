@@ -19,7 +19,7 @@ export const Hero = () => {
       </div>
 
       <Section className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-        <div className="space-y-6">
+        <div className="space-y-6 pb-12 lg:pb-0">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
