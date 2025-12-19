@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +67,7 @@ export const Navbar = () => {
                 />
               </a>
             ))}
-            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
+            <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
               <Button size="sm">Hire on Fiverr</Button>
             </a>
           </nav>
@@ -106,7 +107,7 @@ export const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
+            <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="mt-4">Hire on Fiverr</Button>
             </a>
           </motion.div>

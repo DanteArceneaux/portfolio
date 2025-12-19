@@ -1,14 +1,19 @@
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { profile } from '@/data/profile';
+import { QuickQuoteModal } from '@/features/conversion/QuickQuoteModal';
+import { RiskReversal } from '@/components/conversion/RiskReversal';
 import { motion } from 'framer-motion';
 import { ArrowRight, BadgeCheck, Building2, ChevronDown, Scale } from 'lucide-react';
+import { useState } from 'react';
 
 export const Hero = () => {
   // Served from /public so it has a stable URL (also used by social previews).
   // Use a smaller PNG fallback (Safari / non-WebP) for better performance.
   const headshotPng = '/headshot-512.png';
   const headshotWebp = '/headshot.webp';
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
@@ -107,7 +112,7 @@ export const Hero = () => {
             transition={{ delay: 0.5 }}
             className="flex flex-wrap items-center gap-3 w-full"
           >
-            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <a href={fiverrHref} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
               <Button size="md" className="gap-2 text-base w-full sm:w-auto">
                 Hire Me on Fiverr <ArrowRight className="w-4 h-4" />
               </Button>
@@ -117,6 +122,33 @@ export const Hero = () => {
                 View Work <ChevronDown className="w-4 h-4" />
               </Button>
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-sm text-muted-foreground"
+          >
+            <button
+              type="button"
+              onClick={() => setQuoteOpen(true)}
+              className="underline underline-offset-4 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            >
+              Get a fast quote (copy a brief)
+            </button>
+            <span className="px-2" aria-hidden="true">•</span>
+            <a href="#services" className="underline underline-offset-4 hover:text-foreground">
+              See packages
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+          >
+            <RiskReversal className="pt-2" />
           </motion.div>
         </div>
 
@@ -196,6 +228,8 @@ export const Hero = () => {
            </div>
         </motion.div>
       </Section>
+
+      <QuickQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </div>
   );
 };

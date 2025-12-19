@@ -5,6 +5,17 @@ import { Card } from '@/components/ui/Card';
 import { profile } from '@/data/profile';
 import { cn } from '@/lib/utils';
 import {
+  buildScopeSummary,
+  buildScopeText,
+  clamp,
+  type Animations,
+  type Deadline,
+  type DesignSource,
+  type Forms,
+  type ProjectType,
+  type ScopeState,
+} from '@/features/conversion/scopeModel';
+import {
   AlertTriangle,
   BadgeCheck,
   Clipboard,
@@ -14,212 +25,13 @@ import {
   Sparkles,
 } from 'lucide-react';
 
-type ProjectType = 'uiConversion' | 'landingPage' | 'dashboard' | 'bugfix';
-type DesignSource = 'figma' | 'screenshots' | 'none';
-type Animations = 'none' | 'basic' | 'premium';
-type Forms = 'none' | 'simple' | 'advanced';
-type Deadline = 'normal' | 'rush';
-
-type State = {
-  projectType: ProjectType;
-  designSource: DesignSource;
-  pagesOrSections: number;
-  animations: Animations;
-  forms: Forms;
-  deployment: boolean;
-  deadline: Deadline;
-};
-
-const PROJECT_TYPE_LABEL: Record<ProjectType, string> = {
-  uiConversion: 'UI Conversion (Figma → React/Tailwind)',
-  landingPage: 'Landing Page',
-  dashboard: 'Dashboard',
-  bugfix: 'Bug Fix / Refactor',
-};
-
-const DESIGN_SOURCE_LABEL: Record<DesignSource, string> = {
-  figma: 'Figma file available',
-  screenshots: 'Screenshots only',
-  none: 'No design yet (needs guidance)',
-};
-
-const ANIMATION_LABEL: Record<Animations, string> = {
-  none: 'None',
-  basic: 'Basic',
-  premium: 'Premium',
-};
-
-const FORMS_LABEL: Record<Forms, string> = {
-  none: 'None',
-  simple: 'Simple',
-  advanced: 'Advanced',
-};
-
-function clamp(n: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, n));
-}
-
-function formatUSD(n: number) {
-  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-}
-
-function plural(n: number, singular: string, pluralWord = `${singular}s`) {
-  return n === 1 ? singular : pluralWord;
-}
-
-function getBase(service: ProjectType) {
-  switch (service) {
-    case 'uiConversion':
-      return { min: 99, max: 199, daysMin: 2, daysMax: 3, packageName: 'Rapid UI Conversion' };
-    case 'landingPage':
-      return { min: 249, max: 449, daysMin: 3, daysMax: 5, packageName: 'Landing Page Build' };
-    case 'dashboard':
-      return { min: 399, max: 799, daysMin: 5, daysMax: 9, packageName: 'Custom Dashboard' };
-    case 'bugfix':
-      return { min: 79, max: 199, daysMin: 1, daysMax: 3, packageName: 'Bug Fix & Refactor' };
-  }
-}
-
-function buildScopeText(summary: ReturnType<typeof buildSummary>) {
-  const lines: string[] = [];
-  lines.push(`SCOPE SUMMARY (Draft)`);
-  lines.push(`----------------------------------------`);
-  lines.push(`Project Type: ${summary.projectTypeLabel}`);
-  lines.push(`Design Source: ${summary.designSourceLabel}`);
-  lines.push(`Sections/Pages: ${summary.pagesOrSections}`);
-  lines.push(`Animations: ${summary.animationsLabel}`);
-  lines.push(`Forms: ${summary.formsLabel}`);
-  lines.push(`Deployment: ${summary.deployment ? 'Yes' : 'No'}`);
-  lines.push(`Deadline: ${summary.deadline === 'rush' ? 'Rush' : 'Normal'}`);
-  lines.push('');
-  lines.push(`ESTIMATE (Preview)`);
-  lines.push(`----------------------------------------`);
-  lines.push(`Recommended Package: ${summary.recommendedPackage}`);
-  lines.push(`Estimated Timeline: ${summary.timelineText}`);
-  lines.push(`Estimated Price Range: ${summary.priceText}`);
-  lines.push('');
-  lines.push(`DELIVERABLES`);
-  lines.push(`----------------------------------------`);
-  for (const d of summary.deliverables) lines.push(`- ${d}`);
-  if (summary.risks.length > 0) {
-    lines.push('');
-    lines.push(`RISK FLAGS`);
-    lines.push(`----------------------------------------`);
-    for (const r of summary.risks) lines.push(`- ${r}`);
-  }
-  lines.push('');
-  lines.push(`NEXT STEP`);
-  lines.push(`----------------------------------------`);
-  lines.push(`Send this scope to me on Fiverr: ${profile.socials.fiverr}`);
-  return lines.join('\n');
-}
-
-function buildSummary(state: State) {
-  const base = getBase(state.projectType);
-
-  // Pricing model: deliberately simple and transparent (good for Fiverr buyers)
-  let min = base.min;
-  let max = base.max;
-  let daysMin = base.daysMin;
-  let daysMax = base.daysMax;
-
-  // Complexity based on sections/pages
-  const extraUnits = Math.max(0, state.pagesOrSections - (state.projectType === 'bugfix' ? 1 : 3));
-  min += extraUnits * 20;
-  max += extraUnits * 45;
-  daysMin += Math.ceil(extraUnits / 3);
-  daysMax += Math.ceil(extraUnits / 2);
-
-  // Animations
-  if (state.animations === 'basic') {
-    min += 40;
-    max += 80;
-    daysMax += 1;
-  }
-  if (state.animations === 'premium') {
-    min += 80;
-    max += 160;
-    daysMin += 1;
-    daysMax += 2;
-  }
-
-  // Forms
-  if (state.forms === 'simple') {
-    min += 35;
-    max += 70;
-    daysMax += 1;
-  }
-  if (state.forms === 'advanced') {
-    min += 75;
-    max += 150;
-    daysMin += 1;
-    daysMax += 2;
-  }
-
-  // Deployment
-  if (state.deployment) {
-    min += 25;
-    max += 50;
-  }
-
-  // Design source affects risk + timeline
-  const risks: string[] = [];
-  if (state.designSource === 'screenshots') {
-    risks.push('Screenshots only: expect minor interpretation decisions + extra review.');
-    daysMax += 1;
-  }
-  if (state.designSource === 'none') {
-    risks.push('No design yet: scope may change as we finalize layout and components.');
-    daysMax += 2;
-    max += 120;
-  }
-
-  // Rush multiplier
-  if (state.deadline === 'rush') {
-    risks.push('Rush deadline: limited revision bandwidth; scope must be very clear.');
-    min = Math.round(min * 1.25);
-    max = Math.round(max * 1.25);
-    daysMin = Math.max(1, Math.floor(daysMin * 0.75));
-    daysMax = Math.max(daysMin, Math.floor(daysMax * 0.85));
-  }
-
-  // Deliverables
-  const deliverablesBase = [
-    'Responsive layout (mobile → desktop)',
-    'Clean component structure (React + TypeScript)',
-    'Tailwind styling with consistent spacing + typography',
-    'Accessible UI basics (labels, focus states)',
-    'Professional handoff (run/build instructions)',
-  ];
-  const deliverables: string[] = [...deliverablesBase];
-  if (state.projectType === 'landingPage') deliverables.push('Conversion-friendly sections (hero, benefits, CTA, etc.)');
-  if (state.projectType === 'dashboard') deliverables.push('Interactive UI (filters, tables, and chart skeleton)');
-  if (state.animations !== 'none') deliverables.push('Polished animations (Framer Motion)');
-  if (state.forms !== 'none') deliverables.push('Form validation + success state');
-  if (state.deployment) deliverables.push('Deploy to Netlify/Vercel');
-
-  const timelineText = `${daysMin}–${daysMax} ${plural(daysMax, 'day')}`;
-  const priceText = `${formatUSD(min)} – ${formatUSD(max)}`;
-
-  return {
-    ...state,
-    recommendedPackage: base.packageName,
-    priceText,
-    timelineText,
-    deliverables,
-    risks,
-    projectTypeLabel: PROJECT_TYPE_LABEL[state.projectType],
-    designSourceLabel: DESIGN_SOURCE_LABEL[state.designSource],
-    animationsLabel: ANIMATION_LABEL[state.animations],
-    formsLabel: FORMS_LABEL[state.forms],
-  };
-}
-
 export const ScopeBuilderDemo = () => {
   const [step, setStep] = useState<number>(0);
   const [copied, setCopied] = useState(false);
 
-  const [state, setState] = useState<State>({
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
+
+  const [state, setState] = useState<ScopeState>({
     projectType: 'uiConversion',
     designSource: 'figma',
     pagesOrSections: 3,
@@ -229,8 +41,8 @@ export const ScopeBuilderDemo = () => {
     deadline: 'normal',
   });
 
-  const summary = useMemo(() => buildSummary(state), [state]);
-  const scopeText = useMemo(() => buildScopeText(summary), [summary]);
+  const summary = useMemo(() => buildScopeSummary(state), [state]);
+  const scopeText = useMemo(() => buildScopeText(summary, { fiverrUrl: fiverrHref }), [summary, fiverrHref]);
 
   const totalSteps = 3;
 
@@ -512,7 +324,7 @@ export const ScopeBuilderDemo = () => {
           </div>
 
           <div className="mt-4 flex flex-col sm:flex-row gap-3">
-            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer" className="flex-1">
+            <a href={fiverrHref} target="_blank" rel="noopener noreferrer" className="flex-1">
               <Button className="w-full gap-2">
                 Continue on Fiverr <Gavel className="h-4 w-4" />
               </Button>

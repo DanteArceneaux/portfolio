@@ -5,7 +5,7 @@ import { Modal } from '@/components/ui/Modal';
 import { profile } from '@/data/profile';
 import type { Project, ProjectDemoId } from '@/data/profile.types';
 import { lazy, Suspense, useMemo, useState, type ComponentType, type LazyExoticComponent } from 'react';
-import { CheckCircle2, Play } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Clipboard, Play } from 'lucide-react';
 
 // Lazy-load demos so your initial bundle stays lean (especially important for Fiverr traffic).
 const AnalyticsDashboardDemoLazy = lazy(() =>
@@ -22,6 +22,8 @@ export const Projects = () => {
   const projects: Project[] = profile.projects;
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [copied, setCopied] = useState(false);
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
 
   type DemoComponent = LazyExoticComponent<ComponentType<Record<string, never>>>;
 
@@ -35,6 +37,32 @@ export const Projects = () => {
     if (!activeProject) return null;
     return demoRegistry[activeProject.demoId];
   }, [activeProject]);
+
+  const requirementsText = useMemo(() => {
+    if (!activeProject) return '';
+    return [
+      `Hi Dante — I saw your “${activeProject.title}” demo on your portfolio and I’d like something similar.`,
+      ``,
+      `Goal: (what are you trying to achieve?)`,
+      `Pages/sections:`,
+      `Design link (Figma/screenshots):`,
+      `Deadline:`,
+      `Notes:`,
+      ``,
+      `Can you confirm price + timeline and what you need from me to start?`,
+    ].join('\n');
+  }, [activeProject]);
+
+  async function copyRequirements() {
+    if (!requirementsText) return;
+    try {
+      await navigator.clipboard.writeText(requirementsText);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1200);
+    } catch {
+      setCopied(false);
+    }
+  }
 
   return (
     <Section id="projects" className="bg-secondary/20">
@@ -146,6 +174,27 @@ export const Projects = () => {
         title={activeProject?.title ?? 'Project Demo'}
         description="These are lightweight, interactive demos embedded directly into my portfolio."
         onClose={() => setActiveProject(null)}
+        footer={
+          activeProject ? (
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div className="text-sm">
+                <span className="font-semibold">Want this for your project?</span>{' '}
+                <span className="text-muted-foreground">Copy a quick brief or hire me on Fiverr.</span>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button variant="outline" className="gap-2" onClick={copyRequirements}>
+                  <Clipboard className="h-4 w-4" />
+                  {copied ? 'Copied' : 'Copy requirements'}
+                </Button>
+                <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
+                  <Button className="gap-2 w-full sm:w-auto">
+                    Hire on Fiverr <ArrowUpRight className="h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          ) : null
+        }
       >
         {DemoComponent ? (
           <Suspense

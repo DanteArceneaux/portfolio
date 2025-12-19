@@ -10,6 +10,7 @@ type ModalProps = {
   description?: string;
   onClose: () => void;
   children: React.ReactNode;
+  footer?: React.ReactNode;
   className?: string;
 };
 
@@ -28,7 +29,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
   );
 }
 
-export const Modal = ({ open, title, description, onClose, children, className }: ModalProps) => {
+export const Modal = ({ open, title, description, onClose, children, footer, className }: ModalProps) => {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const lastActiveRef = useRef<HTMLElement | null>(null);
   const titleId = useId();
@@ -130,7 +131,7 @@ export const Modal = ({ open, title, description, onClose, children, className }
             aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
             className={cn(
-              "relative w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl",
+              "relative w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl flex flex-col",
               className
             )}
             initial={{ y: 16, scale: 0.98, opacity: 0 }}
@@ -157,7 +158,12 @@ export const Modal = ({ open, title, description, onClose, children, className }
               </button>
             </div>
 
-            <div className="p-6 overflow-auto max-h-[calc(85vh-88px)]">{children}</div>
+            <div className="p-6 overflow-auto flex-1">{children}</div>
+            {footer ? (
+              <div className="p-6 border-t border-white/10 bg-background/40">
+                {footer}
+              </div>
+            ) : null}
           </motion.div>
         </motion.div>
       )}

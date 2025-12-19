@@ -2,6 +2,8 @@ import { profile } from '@/data/profile';
 import { Github, Linkedin } from 'lucide-react';
 
 export const Footer = () => {
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
+
   return (
     <footer className="py-12 border-t border-white/10 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -13,7 +15,7 @@ export const Footer = () => {
         </div>
 
         <div className="flex gap-6">
-          <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href={fiverrHref} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             Fiverr
           </a>
           <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">

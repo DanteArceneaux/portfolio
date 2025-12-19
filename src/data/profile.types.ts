@@ -10,6 +10,11 @@ export type Service = {
   deliverables: string[];
   turnaround: string;
   requirements: string;
+  /**
+   * Optional deep-link to the matching Fiverr gig for this package.
+   * If omitted, the site will fall back to the general Fiverr profile link.
+   */
+  fiverrGigUrl?: string;
 };
 
 export type ProcessStep = {
@@ -60,6 +65,11 @@ export type CertificationItem = {
 
 export type SocialLinks = {
   fiverr: string;
+  /**
+   * Optional deep-link to your primary Fiverr gig (recommended target for primary CTAs).
+   * If omitted, CTAs should fall back to the general Fiverr profile link.
+   */
+  fiverrGig?: string;
   github: string;
   linkedin: string;
   /**

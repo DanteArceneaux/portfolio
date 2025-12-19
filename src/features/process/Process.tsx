@@ -7,6 +7,7 @@ import { CheckCircle2, Clock, Send } from 'lucide-react';
 
 export const Process = () => {
   const steps: ProcessStep[] = profile.processSteps ?? [];
+  const fiverrHref = profile.socials.fiverrGig ?? profile.socials.fiverr;
 
   const icons = [Send, Clock, CheckCircle2] as const;
 
@@ -49,7 +50,7 @@ export const Process = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
+          <a href={fiverrHref} target="_blank" rel="noopener noreferrer">
             <Button className="gap-2">
               Hire on Fiverr <Send className="h-4 w-4" />
             </Button>
