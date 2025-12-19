@@ -40,10 +40,10 @@
   }
 
   /**
-   * Subtle gradient divider between sections
+   * Subtle gradient divider between sections with primary accent
    */
   .section-divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+    @apply h-px w-full bg-gradient-to-r from-transparent via-primary/15 to-transparent;
   }
 }
 

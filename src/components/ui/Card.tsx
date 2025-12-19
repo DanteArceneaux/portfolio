@@ -14,6 +14,8 @@ export const Card = ({ children, className, hover = true, ...props }: CardProps)
       whileHover={hover ? { y: -5 } : undefined}
       className={cn(
         "bg-card/50 backdrop-blur-sm border border-white/5 rounded-xl p-6 shadow-xl shadow-black/25",
+        // Hover glow effect
+        hover && "transition-all duration-300 hover:border-primary/20 hover:shadow-primary/10",
         className
       )}
       {...props}
