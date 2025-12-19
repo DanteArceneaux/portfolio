@@ -105,28 +105,28 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-wrap items-center gap-3"
+            className="flex flex-wrap items-center gap-3 w-full"
           >
-            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer">
-              <Button size="md" className="gap-2 text-base">
+            <a href={profile.socials.fiverr} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <Button size="md" className="gap-2 text-base w-full sm:w-auto">
                 Hire Me on Fiverr <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
-            <a href="#projects">
-              <Button variant="outline" size="md" className="gap-2 text-base">
+            <a href="#projects" className="w-full sm:w-auto">
+              <Button variant="outline" size="md" className="gap-2 text-base w-full sm:w-auto">
                 View Work <ChevronDown className="w-4 h-4" />
               </Button>
             </a>
           </motion.div>
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative hidden lg:block"
-        >
-           <div className="relative w-full aspect-square max-w-md mx-auto mt-12 lg:mt-0">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="relative hidden lg:block w-full max-w-full"
+          >
+             <div className="relative w-full aspect-square max-w-md mx-auto mt-12 lg:mt-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full opacity-20 blur-3xl animate-pulse" />
               {/* Placeholder for Profile Image - using a div for now or an abstract code block */}
               <div className="relative w-full h-full bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl">
