@@ -15,7 +15,7 @@ export const Faq = () => {
   const [openIndex, setOpenIndex] = useState<number>(0);
 
   return (
-    <Section id="faq" className="bg-background">
+    <Section id="faq">
       <div className="space-y-12 max-w-4xl mx-auto">
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold">FAQ</h2>

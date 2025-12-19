@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export const Skills = () => {
   return (
-    <Section id="skills" className="bg-background/50">
+    <Section id="skills">
       <div className="space-y-8">
         <h2 className="text-3xl md:text-4xl font-display font-bold text-center">Technical Arsenal</h2>
         

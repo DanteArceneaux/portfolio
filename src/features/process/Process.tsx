@@ -12,7 +12,7 @@ export const Process = () => {
   const icons = [Send, Clock, CheckCircle2] as const;
 
   return (
-    <Section id="process" className="bg-background">
+    <Section id="process">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display font-bold">A Simple, Fast Process</h2>

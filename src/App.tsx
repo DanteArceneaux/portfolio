@@ -16,11 +16,13 @@ function App() {
       {/* Ambient lighting layer - carries Hero energy throughout */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Top-left glow (extends from Hero) */}
-        <div className="absolute top-[10%] left-[-15%] w-[50%] h-[40%] bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[8%] left-[-18%] w-[55%] h-[45%] bg-primary/14 rounded-full blur-[140px]" />
         {/* Mid-right accent glow (around Projects/Services) */}
-        <div className="absolute top-[45%] right-[-20%] w-[45%] h-[35%] bg-accent/8 rounded-full blur-[140px]" />
+        <div className="absolute top-[40%] right-[-22%] w-[50%] h-[40%] bg-accent/12 rounded-full blur-[150px]" />
         {/* Bottom-left glow (near Experience/Footer) */}
-        <div className="absolute bottom-[5%] left-[-10%] w-[40%] h-[30%] bg-primary/6 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[0%] left-[-12%] w-[45%] h-[35%] bg-primary/10 rounded-full blur-[130px]" />
+        {/* Center wash so the middle of the page isn't pure black */}
+        <div className="absolute top-[30%] left-[15%] w-[70%] h-[40%] bg-primary/6 rounded-full blur-[180px]" />
       </div>
 
       <a href="#main" className="skip-link">
@@ -35,7 +37,7 @@ function App() {
         <div className="section-divider" />
         <div className="relative">
           {/* Subtle glow behind Services */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-primary/5 rounded-full blur-[80px] pointer-events-none" aria-hidden="true" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[65%] bg-primary/7 rounded-full blur-[90px] pointer-events-none" aria-hidden="true" />
           <Services />
         </div>
         <div className="section-divider" />
@@ -43,19 +45,21 @@ function App() {
         <div className="section-divider" />
         <div className="relative">
           {/* Spotlight behind Projects */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[50%] bg-gradient-to-b from-accent/8 to-transparent rounded-full blur-[100px] pointer-events-none" aria-hidden="true" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-[55%] bg-gradient-to-b from-accent/10 to-transparent rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
           <Projects />
         </div>
         <div className="section-divider" />
         <Faq />
         <div className="section-divider" />
         <div className="relative">
+          {/* Subtle accent behind Skills so it doesn't feel like a dark drop-off */}
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[55%] h-[60%] bg-accent/6 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
           <Skills />
         </div>
         <div className="section-divider" />
         <div className="relative">
           {/* Glow behind Experience */}
-          <div className="absolute top-1/3 right-0 w-[40%] h-[50%] bg-primary/5 rounded-full blur-[80px] pointer-events-none" aria-hidden="true" />
+          <div className="absolute top-1/3 right-0 w-[45%] h-[55%] bg-primary/7 rounded-full blur-[90px] pointer-events-none" aria-hidden="true" />
           <Experience />
         </div>
       </main>

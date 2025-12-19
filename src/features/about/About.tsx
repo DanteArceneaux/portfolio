@@ -11,7 +11,7 @@ export const About = () => {
   };
 
   return (
-    <Section id="about" className="bg-background">
+    <Section id="about">
       <div className="space-y-12">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display font-bold">Why Hire The "J.D." Developer?</h2>
